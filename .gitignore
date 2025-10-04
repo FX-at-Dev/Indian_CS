@@ -1,0 +1,10 @@
+@"
+# node
+backend/node_modules/
+node_modules/
+.env
+.DS_Store
+dist/
+.vscode/
+"@ > .gitignore
+git add .gitignore
