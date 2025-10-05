@@ -87,8 +87,16 @@ img {
 }
 
 .btn.secondary {
-  background: #fff;
-  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .78rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: var(--shadow);
 }
 
 .btn.ghost {
@@ -124,7 +132,7 @@ nav .inner {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: .8rem 0;
+  padding: 0px;
 }
 
 
@@ -539,7 +547,7 @@ body {
 
 .site {
   background: #f8fafc;
-  padding: 1rem;
+  padding: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   position: relative;
 }
