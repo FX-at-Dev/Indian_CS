@@ -2,7 +2,7 @@
 /backend/*  /index.html  200
 
 # API proxy to backend (update with your actual backend URL)
-/api/*  https://your-backend-url.com/api/:splat  200
+/api/*  https://indian-cs.onrender.com  200
 
 # SPA routing - all other routes go to index.html
 /*  /index.html  200
