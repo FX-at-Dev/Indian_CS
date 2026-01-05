@@ -63,7 +63,7 @@ app.use('/api/leaderboard', leaderboardRouter);
 app.use(errorHandler);
 
 // -------------------- Start Server --------------------
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 mongo
   .connect()
