@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Indian Civic Sense</title>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script defer src="assets/js/app.js"></script>
+</head>
+
+<body>
+
+  <nav class="site">
+    <div class="container inner">
+      <a class="brand" href="index.html">
+        <div class="logo">CS</div>
+        <div>Indian Civic Sense</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="upload.html">Report</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+       <div style="display:flex; gap:1rem; align-items:center">
+        <!-- <div class="btn secondary"> -->
+          <span id="nav-user" class="" style="display:none"></span>
+        </div>
+        <a class="btn secondary" href="login.html">Login</a>
+        <!-- <a class="btn" href="register.html">Sign up</a> -->
+      </div>
+    </div>
+  </nav>
+
+  <section style="padding:60px 0; min-height: 70vh; display: flex; align-items: center;">
+    <div class="container">
+      <div class="card" style="max-width:520px; margin: auto;">
+        <h2>Official Login</h2>
+        <p class="muted" style="margin-bottom: 1.5rem;">Please enter the credentials provided to you.</p>
+
+        <form id="login-form" class="form">
+
+          <div>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </div>
+
+          <div>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="••••••••" required />
+          </div>
+
+          <div class="auth-error" style="color:var(--danger); min-height: 1.2em; margin-bottom: 0.5rem;"></div>
+
+          <button class="btn" type="submit">Login</button>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container grid">
+      <div><strong>Indian Civic Sense</strong><br>
+        <small class="muted">An initiative for a cleaner and more responsible India.</small>
+      </div>
+      <div class="links">
+        <a href="terms.html">Terms</a> ·
+        <a href="legal.html">Legal</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      IP.initAuthPage("login");
+    });
+  </script>
+
+</body>
+
+</html>

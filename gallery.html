@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | Indian Civic Sense</title>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Leaflet Map Styles -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- JS Files -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="assets/js/app.js"></script>
+
+  <style>
+    /* ---------- Gallery ---------- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .item {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+
+    .item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .meta {
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ---------- Modal ---------- */
+    .modal {
+      border: none;
+      border-radius: 12px;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 90%;
+      margin: 5vh auto;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      font-weight: bold;
+      color: #555;
+      cursor: pointer;
+      float: right;
+    }
+
+    .close-btn:hover {
+      color: #d32f2f;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    #modal-image {
+      width: 100%;
+      height: auto;
+      max-height: 320px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    #modal-map {
+      height: 230px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .tag {
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .tag.danger {
+      background-color: #ffebee;
+      color: #d32f2f;
+    }
+
+    .tag.success {
+      background-color: #e8f5e9;
+      color: #388e3c;
+    }
+
+    footer {
+      background: #f5f5f5;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    /* Centered section under both columns */
+.modal-center-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.tags-center {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.actions-center {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Proof of closure full-width layout */
+.proof-full {
+  border-top: 1px solid #eee;
+  margin-top: 18px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.proof-full h4 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.proof-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.proof-row div {
+  flex: 1;
+  min-width: 200px;
+}
+
+.proof-row input,
+.proof-row textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.proof-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-inline {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-view {
+  background: #1976d2;
+  color: #fff;
+}
+
+.btn-cancel {
+  background: #eee;
+  color: #222;
+}
+
+.help {
+  text-align: center;
+  color: #d32f2f;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .proof-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modal-center-actions {
+    margin-top: 10px;
+  }
+}
+  </style>
+</head>
+
+<body>
+  <nav class="site">
+    <div class="container inner">
+      <a class="brand" href="index.html">
+        <div class="logo">CS</div>
+        <div>Indian Civic Sense</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="upload.html">Report</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li> 
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+       <div style="display:flex; gap:1rem; align-items:center">
+        <!-- <div class="btn secondary"> -->
+          <span id="nav-user" class="" style="display:none"></span>
+        </div>
+        <a class="btn secondary" href="login.html">Login</a>
+        <!-- <a class="btn" href="register.html">Sign up</a> -->
+      </div>
+    </div>
+  </nav>
+
+  <section style="padding: 60px 0; min-height: 80vh;">
+    <div class="container">
+      <h2 style="margin-bottom: 20px;">Reports Gallery</h2>
+
+      <div id="gallery-grid" class="gallery grid">
+        <div class="alert">Loading reports...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- MODAL ---------- -->
+<dialog id="report-modal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 id="modal-title" style="margin:0; font-size:18px;"></h3>
+      <div>
+        <button id="modal-close-btn" class="close-btn" title="Close">&times;</button>
+      </div>
+    </div>
+
+    <!-- Image + Map side by side -->
+    <div class="modal-body" style="margin-top:12px;">
+      <div class="grid-2">
+        <div>
+          <img id="modal-image" src="" alt="Report Image" />
+          <div style="font-size: 14px; margin-bottom: 10px;">
+            <strong id="modal-reporter"></strong>
+            <span id="modal-date" class="muted" style="margin-left:8px;"></span>
+          </div>
+          <p id="modal-description" style="margin-bottom: 10px; color:#333;"></p>
+        </div>
+
+        <div>
+          <div id="modal-map" aria-hidden="false"></div>
+          <small class="muted" id="modal-coords" style="display: block; margin-top: 6px;"></small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status + Action centered below both columns -->
+    <div class="modal-center-actions">
+      <div class="tags-center">
+        <span id="modal-status" class="tag"></span>
+        <span id="modal-severity" class="tag"></span>
+      </div>
+      <div id="modal-actions" class="actions-center"></div>
+    </div>
+
+    <!-- Proof of Closure now full width -->
+    <div id="closure-proof-section" class="proof-full" style="display: none;">
+      <h4>Proof of Closure</h4>
+
+      <div class="proof-row">
+        <div>
+          <label>Upload Resolution Photo</label><br />
+          <input type="file" id="proof-photo-input" accept="image/*" />
+        </div>
+        <div>
+          <label>Notes (Optional)</label><br />
+          <textarea id="proof-notes-input" rows="2"
+            placeholder="Brief description, e.g., 'Pothole filled and road leveled.'"></textarea>
+        </div>
+      </div>
+
+      <div id="proof-error" class="help"></div>
+
+      <div class="proof-actions">
+        <!-- <button id="submit-proof-btn" class="btn-inline btn-view">Submit Proof</button> -->
+        <!-- <button id="cancel-proof-btn" class="btn-inline btn-cancel">Cancel</button> -->
+      </div>
+    </div>
+  </div>
+</dialog>
+
+
+  <footer>
+    <div class="container grid">
+      <div><strong>Indian Civic Sense</strong><br>
+        <small class="muted">You see an issue, click a picture and report it on our website.</small>
+      </div>
+      <div class="links">
+        <a href="terms.html">Terms</a> ·
+        <a href="legal.html">Legal</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.IP && IP.initGalleryPage) {
+        IP.initGalleryPage();
+      }
+    });
+  </script>
+</body>
+
+</html>

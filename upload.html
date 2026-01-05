@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report a Civic Issue</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+
+<body>
+
+  <nav class="site">
+    <div class="container inner">
+      <a class="brand" href="index.html">
+        <div class="logo">CS</div>
+        <div>Indian Civic Sense</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="upload.html">Report</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+       <div style="display:flex; gap:1rem; align-items:center">
+        <!-- <div class="btn secondary"> -->
+          <span id="nav-user" class="" style="display:none"></span>
+        </div>
+        <a class="btn secondary" href="login.html">Login</a>
+        <!-- <a class="btn" href="register.html">Sign up</a> -->
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div class="container">
+      <h2>Report a Civic Sense Issue</h2>
+      <p class="help">Pick the location on the map, fill the form, and upload a photo. For this fork, everything is
+        stored locally in your browser.</p>
+      <div class="grid-2" style="display: grid;">
+        <div class="card">
+          <form id="report-form" class="form">
+            <div>
+              <label>Title</label>
+              <input name="title" placeholder="Short title like 'Deep pothole near Sector 18'" />
+            </div>
+            <div>
+              <label>Description</label>
+              <textarea name="description" rows="4"
+                placeholder="Describe the issue, e.g., size, traffic impact, nearby landmarks"></textarea>
+            </div>
+            <div>
+              <label>Reporter Email</label>
+              <input name="email" type="email" placeholder="you@example.com" />
+              <div class="help">If logged in, this will auto‑attach your email.</div>
+            </div>
+            <div>
+              <label>Severity</label>
+              <select name="severity">
+                <option>Low</option>
+                <option>Medium</option>
+                <option>Severe</option>
+              </select>
+            </div>
+            <div>
+              <label>Photo</label>
+              <input type="file" name="photo" accept="image/*" />
+            </div>
+            <div class="grid-2">
+              <div>
+                <label>Latitude</label>
+                <input id="lat" name="lat" placeholder="Click the map" readonly />
+              </div>
+              <div>
+                <label>Longitude</label>
+                <input id="lng" name="lng" placeholder="Click the map" readonly />
+              </div>
+            </div>
+            <div>
+              <label>City</label>
+              <input name="city" placeholder="Enter city name (e.g. Delhi)" required />
+            </div>
+            <div class="grid-3" style="column-gap:.4rem; margin-bottom:1rem; display: inline;text-align: center;">
+              <button type="button" id="auto-locate" class="btn secondary" style="background-color: rgb(38, 255, 0);">📍
+                Use My Location</button>
+              <button type="button" id="clear-map" class="btn secondary" style="background-color: rgb(38, 255, 0);">🗑
+                Clear Marker</button>
+            </div>
+            <div id="upload-error" class="help" style="color:var(--danger)"></div>
+            <button class="btn" type="submit">Submit Report</button>
+          </form>
+        </div>
+        <div class="card">
+          <div id="map" style="height: 604px; border-radius:12px; overflow:hidden; z-index: 0;"></div>
+          <small class="muted">Click anywhere to drop a marker. Geolocation will try to center near you.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="container grid">
+      <div><strong>Indian Civic Sense</strong><br>
+        <small class="muted">You see a issue, click a picture and report it on our website.</small>
+      </div>
+      <div class="links">
+        <a href="terms.html">Terms</a> ·
+        <a href="legal.html">Legal</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+
+
+</html>
