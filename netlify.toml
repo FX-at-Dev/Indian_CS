@@ -1,0 +1,26 @@
+[build]
+  # No build command needed for static HTML
+  publish = "."
+  
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirect all API calls to your backend server
+[[redirects]]
+  from = "/api/*"
+  to = "https://your-backend-url.com/api/:splat"
+  status = 200
+  force = true
+
+# SPA fallback - redirect all other routes to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
