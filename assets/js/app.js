@@ -2,7 +2,7 @@
 // INDIAN CIVIC SENSE - FINAL APP.JS (COMPLETE & READY)
 // =========================================
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "http://localhost:10000/api";
 let detailMapInstance = null; // Global map instance for gallery modal
 
 // -----------------------------------------------------------------------------
