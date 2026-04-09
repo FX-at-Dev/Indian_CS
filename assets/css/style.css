@@ -661,3 +661,58 @@ body {
     display: flex; /* show when "open" class added */
   }
 }
+
+/* Final nav overrides to keep header responsive and consistent across pages */
+.nav-links {
+  padding-left: 0;
+  margin: 0;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.H1 {
+  display: block;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  nav .inner {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.6rem 0;
+  }
+
+  #nav-toggle {
+    display: flex;
+    margin-left: auto;
+  }
+
+  nav .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    right: 0;
+    width: min(260px, 90vw);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+    padding: 0.75rem;
+    flex-direction: column;
+    gap: 0.35rem;
+    z-index: 120;
+  }
+
+  nav .nav-links.open {
+    display: flex;
+  }
+
+  .nav-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

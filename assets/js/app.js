@@ -595,9 +595,39 @@ function highlightActiveNavLink() {
     });
 }
 
+function setupMobileNav() {
+    const navToggle = document.getElementById("nav-toggle");
+    const navLinks = document.querySelector("nav .nav-links");
+
+    if (!navToggle || !navLinks) return;
+
+    const closeMenu = () => {
+        navToggle.classList.remove("open");
+        navLinks.classList.remove("open");
+        document.body.classList.remove("menu-open");
+    };
+
+    navToggle.addEventListener("click", () => {
+        navToggle.classList.toggle("open");
+        navLinks.classList.toggle("open");
+        document.body.classList.toggle("menu-open", navLinks.classList.contains("open"));
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!navLinks.classList.contains("open")) return;
+        if (navToggle.contains(event.target) || navLinks.contains(event.target)) return;
+        closeMenu();
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     setupNavbarAuth();
     highlightActiveNavLink();
+    setupMobileNav();
 
     const currentPage = window.location.pathname.split('/').pop() || "index.html";
 
