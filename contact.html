@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <script defer src="assets/js/app.js"></script>
-
-</head>
-
-<body>
-
-  <nav class="site">
-    <div class="container inner">
-      <a class="brand" href="index.html">
-        <div class="logo">CS</div>
-        <div>Indian Civic Sense</div>
-      </a>
-      <ul class="nav-links">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const u = window.IP && typeof IP.currentUser === "function" ? IP.currentUser() : null;
+      const navUser = document.getElementById("nav-user");
+      if (u && navUser) {
+        navUser.style.display = "inline-block";
+        navUser.textContent = u.name || u.email;
+        const login = document.querySelector('a[href="login.html"]');
+        const reg = document.querySelector('a[href="register.html"]');
+        if (login) login.outerHTML = '<button class="btn secondary" onclick="IP.logout()">Logout</button>';
+        if (reg) reg.remove();
+      }
+      const here = location.pathname.split('/').pop();
+      document.querySelectorAll("nav a").forEach(a => {
+        if (a.getAttribute("href") === here) a.classList.add("active");
+      });
+    });
+  </script>
         <li><a href="upload.html">Report</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="leaderboard.html">Leaderboard</a></li>
@@ -34,10 +34,10 @@
     </div>
   </nav>
   <script>
-    (function () {
-      const u = IP.currentUser();
+    document.addEventListener("DOMContentLoaded", function () {
+      const u = window.IP && typeof IP.currentUser === "function" ? IP.currentUser() : null;
       const navUser = document.getElementById("nav-user");
-      if (u) {
+      if (u && navUser) {
         navUser.style.display = "inline-block";
         navUser.textContent = u.name || u.email;
         const login = document.querySelector('a[href="login.html"]');
@@ -49,7 +49,7 @@
       document.querySelectorAll("nav a").forEach(a => {
         if (a.getAttribute("href") === here) a.classList.add("active");
       });
-    })();
+    });
   </script>
 
 

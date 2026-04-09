@@ -46,10 +46,10 @@
 </nav>
 
 <script>
-  (function(){
-    const u = IP.currentUser();
+  document.addEventListener("DOMContentLoaded", function () {
+    const u = window.IP && typeof IP.currentUser === "function" ? IP.currentUser() : null;
     const navUser = document.getElementById("nav-user");
-    if (u) {
+    if (u && navUser) {
       navUser.style.display = "inline-block";
       navUser.textContent = u.name || u.email;
       const login = document.querySelector('a[href="login.html"]');
@@ -58,10 +58,10 @@
       if (reg) reg.remove();
     }
     const here = location.pathname.split('/').pop();
-    document.querySelectorAll("nav a").forEach(a=>{
+    document.querySelectorAll("nav a").forEach(a => {
       if (a.getAttribute("href") === here) a.classList.add("active");
     });
-  })();
+  });
 </script>
 
 
