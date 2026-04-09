@@ -73,8 +73,8 @@ git subtree push --prefix backend heroku main
 
 ## ⚙️ Configuration After Deployment
 
-### 1. Update Backend URL
-After deploying your backend, update these files with your backend URL:
+### 1. Update API Redirect Target
+After deploying your backend, keep frontend API calls on `/api` and update redirect targets:
 
 **File: `netlify.toml`** (line 11)
 ```toml
@@ -86,24 +86,29 @@ to = "https://indian-cs.onrender.com/api/:splat"
 /api/*  https://indian-cs.onrender.com/api/:splat  200
 ```
 
-**File: `assets/js/config.js`** (line 4)
+**File: `assets/js/config.js`**
 ```javascript
-: 'https://indian-cs.onrender.com';
+window.APP_CONFIG = {
+   API_BASE: window.location.hostname === "localhost"
+      ? "http://localhost:10000/api"
+      : "/api",
+};
 ```
 
-### 2. Update CORS in Backend
-In your `backend/server.js`, update CORS to allow your Netlify domain:
+In production, `/api` will be routed by Netlify to your backend using `netlify.toml` or `_redirects`.
+
+### 2. Update CORS Origins in Backend .env
+Set frontend origins in `backend/.env`:
 ```javascript
-app.use(cors({
-   origin: ['https://indiancs.netlify.app', 'http://localhost:8080']
-}));
+CORS_ORIGINS="https://indiancs.netlify.app,http://localhost:8080"
 ```
 
 ### 3. Set Environment Variables
-On your backend hosting platform, add:
+Use `backend/.env.example` as the source of truth, then add matching values on your backend hosting platform:
 - `MONGODB_URI` or `MONGO_URI`
 - `JWT_SECRET`
 - `PORT` (usually set automatically)
+- `CORS_ORIGINS`
 - Any other variables from your `.env` file
 
 ---

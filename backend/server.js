@@ -14,11 +14,23 @@ const errorHandler = require("./middleware/errorHandler");
 const mongo = require("./db/mongo");
 const leaderboardRouter = require('./routes/leaderboard');
 
+const REQUIRED_ENV_VARS = ["JWT_SECRET", "MONGO_URI"];
+const missingEnvVars = REQUIRED_ENV_VARS.filter((name) => !process.env[name]);
+if (missingEnvVars.length > 0) {
+  console.error(`❌ Missing required environment variables: ${missingEnvVars.join(", ")}`);
+  process.exit(1);
+}
+
+const DEFAULT_CORS_ORIGINS = "https://indiancs.netlify.app,http://localhost:8080";
+const CORS_ORIGINS = (process.env.CORS_ORIGINS || DEFAULT_CORS_ORIGINS)
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 const app = express();
 
 // -------------------- Middleware --------------------
-app.use(cors());
+app.use(cors({ origin: CORS_ORIGINS }));
 app.use(express.json({ limit: "40mb" }));
 app.use(express.urlencoded({ limit: "40mb", extended: true }));
 
@@ -30,7 +42,7 @@ app.use(express.static(path.join(__dirname, "../client"))); // or "../frontend" 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["https://indiancs.netlify.app", "http://localhost:8080"],
+    origin: CORS_ORIGINS,
   },
 });
 

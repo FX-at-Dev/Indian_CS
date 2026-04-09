@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <title>Indian Civic Sense</title>
   <link rel="stylesheet" href="assets/css/style.css"/>
+  <script defer src="assets/js/config.js"></script>
   <script defer src="assets/js/app.js"></script>
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -149,59 +150,6 @@
       </div>
     </div>
   </section>
-
-  <!-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" -->
-  <!-- integrity="sha256-GZC39H8GkS9oM6T2GJrC6S2RY6Yk9gE9rC2xOZbWv8M=" crossorigin=""></script> -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-VGgG3lX6Eusx6Q5Z5QF1T4Q3EoE5z1FMvx6bMpiKFFk=" crossorigin="" />
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      IP.renderKpis();
-      IP.initUploadPage = IP.initUploadPage || function () { };
-      const map = L.map('map').setView([20.5937, 78.9629], 5);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19, attribution: '© OpenStreetMap'
-      }).addTo(map);
-      let marker;
-      map.on('click', (e) => {
-        if (marker) marker.remove();
-        marker = L.marker(e.latlng).addTo(map);
-      });
-    });
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", async function () {
-      // Call backend KPI API
-      try {
-        const apiBase = location.hostname === 'localhost'
-          ? 'http://localhost:10000'
-          : 'https://indian-cs.onrender.com';
-        const res = await fetch(`${apiBase}/api/reports/kpis`);
-        const stats = await res.json();
-
-        document.getElementById("k-total").textContent = stats.total;
-        document.getElementById("k-open").textContent = stats.open;
-        document.getElementById("k-severe").textContent = stats.severe;
-        document.getElementById("k-users").textContent = stats.users;
-      } catch (err) {
-        console.error("Error fetching KPIs:", err);
-      }
-
-      // Keep your demo map
-      const map = L.map('map').setView([20.5937, 78.9629], 5);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19, attribution: '© OpenStreetMap'
-      }).addTo(map);
-      let marker;
-      map.on('click', (e) => {
-        if (marker) marker.remove();
-        marker = L.marker(e.latlng).addTo(map);
-      });
-    });
-  </script>
-
 
   <footer>
     <div class="container grid">

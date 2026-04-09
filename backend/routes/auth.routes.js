@@ -8,7 +8,7 @@ const { User } = require("../models/userModel"); // Ensure the path to userModel
 
 // NOTE: Register logic has been removed as per user request.
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // LOGIN
 router.post("/login", async (req, res) => {

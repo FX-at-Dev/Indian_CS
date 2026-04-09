@@ -57,14 +57,27 @@ npm install
 
 4. **Set up environment variables**
 
-Create a `.env` file in the `backend` directory:
+Create your backend env file from the template:
+
+```bash
+cd backend
+# macOS/Linux
+cp .env.example .env
+# Windows PowerShell
+Copy-Item .env.example .env
+```
+
+Then update `backend/.env` values for your environment:
 
 ```env
 PORT=10000
 MONGO_URI=mongodb://127.0.0.1:27017/civic_db
 JWT_SECRET=your-secret-key-change-in-production
 NODE_ENV=development
+CORS_ORIGINS=https://indiancs.netlify.app,http://localhost:8080
 ```
+
+`JWT_SECRET` and `MONGO_URI` are required. The backend exits on startup if either is missing.
 
 5. **Start MongoDB**
 

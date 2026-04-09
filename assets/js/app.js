@@ -2,9 +2,8 @@
 // INDIAN CIVIC SENSE - FINAL APP.JS (COMPLETE & READY)
 // =========================================
 
-const API_BASE = window.location.hostname === 'localhost'
-    ? "http://localhost:10000/api"
-    : "https://indian-cs.onrender.com/api";
+const API_BASE = (window.APP_CONFIG && window.APP_CONFIG.API_BASE)
+    || (window.location.hostname === 'localhost' ? "http://localhost:10000/api" : "/api");
 let detailMapInstance = null; // Global map instance for gallery modal
 
 // -----------------------------------------------------------------------------

@@ -1,6 +1,6 @@
-// API Configuration
-const API_BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:10000'
-  : 'https://indian-cs.onrender.com';
-
-export default API_BASE_URL;
+// Frontend runtime config. In production, use relative /api so hosting redirects decide backend target.
+window.APP_CONFIG = {
+  API_BASE: window.location.hostname === "localhost"
+    ? "http://localhost:10000/api"
+    : "/api",
+};
