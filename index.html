@@ -175,7 +175,10 @@
     document.addEventListener("DOMContentLoaded", async function () {
       // Call backend KPI API
       try {
-        const res = await fetch("http://localhost:5000/api/reports/kpis");
+        const apiBase = location.hostname === 'localhost'
+          ? 'http://localhost:10000'
+          : 'https://indian-cs.onrender.com';
+        const res = await fetch(`${apiBase}/api/reports/kpis`);
         const stats = await res.json();
 
         document.getElementById("k-total").textContent = stats.total;

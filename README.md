@@ -60,7 +60,7 @@ npm install
 Create a `.env` file in the `backend` directory:
 
 ```env
-PORT=5000
+PORT=10000
 MONGO_URI=mongodb://127.0.0.1:27017/civic_db
 JWT_SECRET=your-secret-key-change-in-production
 NODE_ENV=development
@@ -101,6 +101,8 @@ npx http-server -p 8080
 
 Visit `http://localhost:8080` in your browser.
 
+If you are using the deployed site, open [https://indiancs.netlify.app/](https://indiancs.netlify.app/) and make sure the backend is reachable at [https://indian-cs.onrender.com](https://indian-cs.onrender.com).
+
 ## 📖 Usage
 
 ### Reporting a Civic Issue
@@ -133,7 +135,7 @@ Visit `http://localhost:8080` in your browser.
 3. View issues and mark them as "Closed" with:
    - Resolution photo (proof of work completed)
    - Resolution notes
-4. Access the KPI dashboard at `/api/reports/kpi` to view statistics
+4. Access the KPI dashboard at `/api/reports/kpis` to view statistics
 
 ## 🏗️ Project Structure
 
@@ -177,15 +179,16 @@ Indian_CS/
 ## 🔧 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register new user
+_Registration is currently not exposed by the backend routes._
 - `POST /api/auth/login` - Login user
+- `GET /api/auth/verify` - Verify an existing token
 
 ### Reports
 - `GET /api/reports` - Fetch all reports
 - `POST /api/reports` - Create new report
 - `GET /api/reports/:id` - Get single report
-- `PUT /api/reports/:id/resolve` - Mark report as resolved (government only)
-- `GET /api/reports/kpi` - Get KPI statistics
+- `PATCH /api/reports/:id/close` - Mark report as closed (government/admin only)
+- `GET /api/reports/kpis` - Get KPI statistics
 
 ### Leaderboard
 - `GET /api/leaderboard` - Get leaderboard data

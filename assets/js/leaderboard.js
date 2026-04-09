@@ -1,7 +1,10 @@
 // Use absolute URLs for backend API endpoints to support running frontend on a different port (e.g., Live Server)
 (function () {
-  const API_URL = 'http://localhost:5000/api/leaderboard';            // GET aggregated JSON
-  const SSE_URL = 'http://localhost:5000/api/leaderboard/stream';     // SSE stream for live updates
+  const API_BASE = window.location.hostname === 'localhost'
+    ? 'http://localhost:10000/api'
+    : 'https://indian-cs.onrender.com/api';
+  const API_URL = `${API_BASE}/leaderboard`;            // GET aggregated JSON
+  const SSE_URL = `${API_BASE}/leaderboard/stream`;     // SSE stream for live updates
   const lbBody = document.getElementById('lb-body');
   const POLL_INTERVAL = 10_000; // ms fallback if SSE not available
   let pollTimer = null;

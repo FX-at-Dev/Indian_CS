@@ -1,6 +1,6 @@
 // API Configuration
 const API_BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:5000'
-  : 'https://indian-cs.onrender.com'; // Replace with your actual backend URL
+  ? 'http://localhost:10000'
+  : 'https://indian-cs.onrender.com';
 
 export default API_BASE_URL;

@@ -29,7 +29,9 @@ app.use(express.static(path.join(__dirname, "../client"))); // or "../frontend" 
 // -------------------- Create HTTP + Socket.IO --------------------
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: "https://indiancs.netlify.app/" },
+  cors: {
+    origin: ["https://indiancs.netlify.app", "http://localhost:8080"],
+  },
 });
 
 io.on("connection", (socket) => {

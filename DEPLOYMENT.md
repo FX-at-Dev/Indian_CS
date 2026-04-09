@@ -78,24 +78,24 @@ After deploying your backend, update these files with your backend URL:
 
 **File: `netlify.toml`** (line 11)
 ```toml
-to = "https://your-actual-backend-url.com/api/:splat"
+to = "https://indian-cs.onrender.com/api/:splat"
 ```
 
 **File: `_redirects`** (line 5)
 ```
-/api/*  https://your-actual-backend-url.com/api/:splat  200
+/api/*  https://indian-cs.onrender.com/api/:splat  200
 ```
 
 **File: `assets/js/config.js`** (line 4)
 ```javascript
-: 'https://your-actual-backend-url.com';
+: 'https://indian-cs.onrender.com';
 ```
 
 ### 2. Update CORS in Backend
 In your `backend/server.js`, update CORS to allow your Netlify domain:
 ```javascript
 app.use(cors({
-  origin: ['https://your-netlify-site.netlify.app', 'http://localhost:5173']
+   origin: ['https://indiancs.netlify.app', 'http://localhost:8080']
 }));
 ```
 

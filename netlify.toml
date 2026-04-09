@@ -8,7 +8,7 @@
 # Redirect all API calls to your backend server
 [[redirects]]
   from = "/api/*"
-  to = "https://indian-cs.onrender.com"
+  to = "https://indian-cs.onrender.com/api/:splat"
   status = 200
   force = true
 
